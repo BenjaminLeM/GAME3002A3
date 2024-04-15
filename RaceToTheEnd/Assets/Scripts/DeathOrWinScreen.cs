@@ -35,6 +35,7 @@ public class DeathOrWinScreen : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         Player.transform.position = StartLoc.position;
+        Player.GetComponent<PlayerControls>().isDead = false;
         Key1.enabled = true;
         Key2.enabled = true;
         Key3.enabled = true;
