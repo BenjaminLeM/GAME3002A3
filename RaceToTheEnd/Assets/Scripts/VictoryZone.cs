@@ -9,6 +9,8 @@ public class VictoryZone : MonoBehaviour
     Canvas DeathOrWinScreen;
     [SerializeField]
     Text WinText;
+    [SerializeField]
+    Button RestartButton;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.name.StartsWith("Player") && !other.gameObject.GetComponent<PlayerControls>().isDead)
@@ -18,6 +20,7 @@ public class VictoryZone : MonoBehaviour
             Time.timeScale = 0;
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
+            RestartButton.enabled = true;
         }
     }
 }

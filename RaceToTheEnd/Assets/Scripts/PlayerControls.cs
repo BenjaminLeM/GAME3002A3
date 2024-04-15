@@ -46,6 +46,8 @@ public class PlayerControls : MonoBehaviour
     private Text DeathText;
     [SerializeField]
     private Canvas PauseScreen;
+    [SerializeField]
+    private Button RestartButton;
     Vector2 mouseDelta = Vector2.zero;
     Vector2 rotationAmount;
     float currentPlayerSpeed;
@@ -181,6 +183,7 @@ public class PlayerControls : MonoBehaviour
                 Time.timeScale = 0;
                 Cursor.lockState = CursorLockMode.Confined;
                 Cursor.visible = true;
+                RestartButton.enabled = true;
             }
         }
     }

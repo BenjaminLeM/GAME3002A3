@@ -11729,7 +11729,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1540057195}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -13532,6 +13532,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DeathOrWinScreen: {fileID: 1164490533}
   WinText: {fileID: 121476747}
+  RestartButton: {fileID: 1540057197}
 --- !u!65 &1780055757
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17364,6 +17365,7 @@ MonoBehaviour:
   DeathOrWinScreen: {fileID: 1164490533}
   DeathText: {fileID: 439204991}
   PauseScreen: {fileID: 1750007409}
+  RestartButton: {fileID: 1540057197}
   isGrounded: 0
   isDead: 0
   speedUpOrSlowDownEffect: 1

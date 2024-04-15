@@ -28,7 +28,6 @@ public class DeathOrWinScreen : MonoBehaviour
     private void Awake()
     {
         RestartButton.onClick.AddListener(delegate { Reset(); });
-        
     }
 
     private void Reset()
@@ -45,5 +44,6 @@ public class DeathOrWinScreen : MonoBehaviour
         GetComponent<Canvas>().enabled = false;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        RestartButton.enabled = false;
     }
 }
