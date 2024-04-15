@@ -22,7 +22,7 @@ public class SpinningObject : MonoBehaviour
     {
         if (rb != null) 
         {
-            rb.AddTorque(new Vector3(SpinSpeed, 0.0f, 0.0f), ForceMode.Force);
+            rb.AddTorque(rb.transform.up * SpinSpeed, ForceMode.Force);
         }
     }
 }

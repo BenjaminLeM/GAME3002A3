@@ -62,7 +62,7 @@ public class SpringPlatform : MonoBehaviour
             {
                 hasLaunched = false;
                 LauncherSpring.connectedAnchor = new Vector3(LauncherSpring.connectedAnchor.x,
-                LauncherSpring.connectedAnchor.y - ((MinSpringLength * 2) * dt),
+                LauncherSpring.connectedAnchor.y - ((MinSpringLength * 4) * dt),
                 LauncherSpring.connectedAnchor.z);
                 if (LauncherSpring.connectedAnchor.y <= MinSpringLength) 
                 {

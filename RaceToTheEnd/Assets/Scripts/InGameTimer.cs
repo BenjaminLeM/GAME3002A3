@@ -30,7 +30,7 @@ public class InGameTimer : MonoBehaviour
     private void FixedUpdate()
     {
         float dt = Time.deltaTime;
-        if (Timer >= 2000.0f)
+        if (Timer >= 180.0f)
         {
             GetComponent<PlayerControls>().isDead = true;
         }

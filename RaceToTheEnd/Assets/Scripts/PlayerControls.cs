@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.XR;
 
 public class PlayerControls : MonoBehaviour
@@ -18,6 +19,26 @@ public class PlayerControls : MonoBehaviour
     float jumpImpluseForce = 5000.0f;
     [SerializeField]
     Transform m_CameraTransform;
+    [SerializeField]
+    private Transform StartPos;
+    [SerializeField]
+    private Transform Key1Pos;
+    [SerializeField]
+    private Transform Door1Pos;
+    [SerializeField]
+    private Transform Key2Pos;
+    [SerializeField]
+    private Transform Door2Pos;
+    [SerializeField]
+    private Transform Key3Pos;
+    [SerializeField]
+    private Transform Door3Pos;
+    [SerializeField]
+    private Transform EndPos;
+    [SerializeField]
+    private Canvas DeathOrWinScreen;
+    [SerializeField]
+    private Text DeathText;
     Vector2 mouseDelta = Vector2.zero;
     Vector2 rotationAmount;
     float currentPlayerSpeed;
@@ -40,7 +61,7 @@ public class PlayerControls : MonoBehaviour
         mouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         float dt = Time.deltaTime;
         rotationAmount += mouseDelta * dt * LookSpeed;
-        if (!isDead)
+        if (!isDead && Time.timeScale != 0)
         {
             if (Input.GetKey(KeyCode.W))
             {
@@ -69,6 +90,40 @@ public class PlayerControls : MonoBehaviour
             else
             {
                 currentPlayerSpeed = PlayerSpeed * speedUpOrSlowDownEffect;
+            }
+
+            //f1-8 key warps
+            if (Input.GetKeyDown(KeyCode.F1)) 
+            {
+                m_rb.position = StartPos.position;
+            }
+            if (Input.GetKeyDown(KeyCode.F2)) 
+            {
+                m_rb.position = Key1Pos.position;
+            }
+            if (Input.GetKeyDown(KeyCode.F3))
+            {
+                m_rb.position = Door1Pos.position;
+            }
+            if (Input.GetKeyDown(KeyCode.F4))
+            {
+                m_rb.position = Key2Pos.position;
+            }
+            if (Input.GetKeyDown(KeyCode.F5))
+            {
+                m_rb.position = Door2Pos.position;
+            }
+            if (Input.GetKeyDown(KeyCode.F6))
+            {
+                m_rb.position = Key3Pos.position;
+            }
+            if (Input.GetKeyDown(KeyCode.F7))
+            {
+                m_rb.position = Door3Pos.position;
+            }
+            if (Input.GetKeyDown(KeyCode.F8))
+            {
+                m_rb.position = EndPos.position;
             }
         }
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -99,6 +154,14 @@ public class PlayerControls : MonoBehaviour
             else 
             {
                 isGrounded = false;
+            }
+            if (isDead)
+            {
+                DeathOrWinScreen.enabled = true;
+                DeathText.enabled = true;
+                Time.timeScale = 0;
+                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.visible = true;
             }
         }
     }

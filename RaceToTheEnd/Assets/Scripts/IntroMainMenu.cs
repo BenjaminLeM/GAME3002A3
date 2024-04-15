@@ -40,6 +40,7 @@ public class IntroMainMenu : MonoBehaviour
         IntroScreen.enabled = false;
         Time.timeScale = 1;
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void ControlsAndIntroButton() 
