@@ -10,6 +10,11 @@ public class PlayerControls : MonoBehaviour
 {
     // Start is called before the first frame update
     Rigidbody m_rb;
+    HingeJoint m_HingeJoint;
+    JointSpring m_springJoint;
+    float CameraSpring = 5000.0f;
+    float CameraSpringDampen = 10.0f;
+    float currentAnglePos = 0;
     Vector3 forceMovement;
     [SerializeField]
     float PlayerSpeed = 50.0f;
@@ -39,6 +44,8 @@ public class PlayerControls : MonoBehaviour
     private Canvas DeathOrWinScreen;
     [SerializeField]
     private Text DeathText;
+    [SerializeField]
+    private Canvas PauseScreen;
     Vector2 mouseDelta = Vector2.zero;
     Vector2 rotationAmount;
     float currentPlayerSpeed;
@@ -53,6 +60,12 @@ public class PlayerControls : MonoBehaviour
     void Start()
     {
         m_rb = GetComponent<Rigidbody>();
+        m_HingeJoint = GetComponent<HingeJoint>();
+        m_HingeJoint.useSpring = true;
+        m_springJoint = new JointSpring();
+        m_springJoint.spring = CameraSpring;
+        m_springJoint.damper = CameraSpringDampen;
+        m_HingeJoint.spring = m_springJoint;
     }
 
     // Update is called once per frame
@@ -126,16 +139,12 @@ public class PlayerControls : MonoBehaviour
                 m_rb.position = EndPos.position;
             }
         }
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab) && Time.timeScale != 0)
         {
-            if (Time.timeScale != 0)
-            {
-                Time.timeScale = 0;
-            }
-            else
-            {
-                Time.timeScale = 1;
-            }
+            Time.timeScale = 0;
+            PauseScreen.enabled = true;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
         }
     }
     private void FixedUpdate()
@@ -144,7 +153,17 @@ public class PlayerControls : MonoBehaviour
         {
             m_rb.AddForce(forceMovement);
             m_rb.GetComponent<Transform>().Rotate(0.0f, (rotationAmount.x / 3), 0.0f);
-            m_CameraTransform.Rotate((rotationAmount.y / 3), 0.0f, 0.0f);
+            m_springJoint.targetPosition = currentAnglePos + rotationAmount.y;
+            m_HingeJoint.spring = m_springJoint;
+            currentAnglePos += rotationAmount.y;
+            if (currentAnglePos > m_HingeJoint.limits.max)
+            {
+                currentAnglePos = m_HingeJoint.limits.max;
+            }
+            else if (currentAnglePos < m_HingeJoint.limits.min) 
+            {
+                currentAnglePos = m_HingeJoint.limits.min;
+            }
             rotationAmount = Vector2.zero;
             forceMovement = Vector3.zero;
             if (m_rb.velocity.y == 0)

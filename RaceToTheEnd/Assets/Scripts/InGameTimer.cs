@@ -39,4 +39,9 @@ public class InGameTimer : MonoBehaviour
             Timer += dt;
         }
     }
+
+    public void SetTimer(float t) 
+    {
+        Timer = t;
+    }
 }

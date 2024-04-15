@@ -359,6 +359,7 @@
 "Assets/Scripts/InGameTimer.cs"
 "Assets/Scripts/IntroMainMenu.cs"
 "Assets/Scripts/Key.cs"
+"Assets/Scripts/PauseUI.cs"
 "Assets/Scripts/PlayerControls.cs"
 "Assets/Scripts/SpeedUpOrSlowdownZone.cs"
 "Assets/Scripts/SpikeObstacle.cs"

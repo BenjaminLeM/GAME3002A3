@@ -18,6 +18,7 @@ public class DoorTrigger : MonoBehaviour
     private MeshRenderer DoorKey;
     private bool DoorIsOpening = false;
     private bool PlayerIsInTrigger = false;
+    private float Timer = 0.0f;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.name.StartsWith("Player")) 
@@ -53,16 +54,24 @@ public class DoorTrigger : MonoBehaviour
     {
         
         float dt = Time.deltaTime;
-        if (DoorIsOpening) 
+        if (DoorIsOpening && Timer < 5.0f)
         {
             LeftDoor.OpenDoorExternal();
             RightDoor.OpenDoorExternal();
+            Timer += dt;
         }
-        else 
-        { 
+        else if (Timer >= 5.0f) 
+        {
+            Timer = 0.0f;
+            DoorIsOpening = false;
+        }
+        else
+        {
             LeftDoor.CloseDoorExternal();
             RightDoor.CloseDoorExternal();
+            Timer = 0.0f;
         }
     }
 
+    
 }
